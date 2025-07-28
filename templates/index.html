@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home to API</title>
+    <link rel="stylesheet" href="../static/main.css">
+    <link rel="shortcut icon" href="../static/logo.ico" type="image/x-icon">
+</head>
+
+<body>
+    <h1>Hello, it's API to SHAURU.APP</h1>
+
+    <button id="send">Send</button>
+
+    <h1 id="counter">-2</h1>
+
+    <h2 id="res"></h2>
+
+
+    <script>
+
+        console.log("hello, world!");
+
+
+        var i = 0;
+
+        counter = document.getElementById('counter');
+
+        document.getElementById('send').onclick = () => {
+            i++;
+            counter.innerText = i;
+
+            fetch('http://127.0.0.1:8081/get-items')
+                .then(response => response.json())
+                .then(data => {
+
+                });
+
+        };
+
+    </script>
+</body>
+
+</html>
