@@ -8,7 +8,7 @@ def Init():
     con = sqlite3.connect(DATABASE_FILE)
     cur = con.cursor()
     cur.execute(f"CREATE TABLE IF NOT EXISTS {USERS_TABLE} (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, prof TEXT)")
-    con.commit()
+    con.commit()    
     con.close()
 
 def add_item(person : Person):
@@ -22,7 +22,9 @@ def get_items():
     con = sqlite3.connect(DATABASE_FILE)
     cur = con.cursor()
     cur.execute(f"SELECT * FROM {USERS_TABLE}")
-    items = cur.fetchall()
+    users = cur.fetchall()
     con.close()
-    data = {k:v for (k, v) in items}
+    data = {}
+    for user in users:
+        data[int(user[0])] = user[1] + " - " + str(user[2])
     return data

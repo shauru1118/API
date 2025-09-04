@@ -2,10 +2,9 @@ from flask import Flask, jsonify, request
 from classes import Person
 import dbfunc as db
 import utils
-import json
 
-PHIS_MATH = 1
-INFO_MATH = 2
+PHIS_MATH = "phis"
+INFO_MATH = "inf"
 
 app = Flask(__name__)
 
@@ -31,4 +30,6 @@ def get_user():
 if __name__ == '__main__':
     db.Init()
     db.add_item(Person("albert", PHIS_MATH))
+    db.add_item(Person("ivan", PHIS_MATH))
+    db.add_item(Person("danya", INFO_MATH))
     app.run("0.0.0.0", port=5000, debug=False)
