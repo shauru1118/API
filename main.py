@@ -1,41 +1,18 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from classes import Item
+import flask
+from classes import Person
+import dbfunc as db
+import utils
 
-app = FastAPI()
+PHIS_MATH = 1
+INFO_MATH = 2
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5500",
-        "http://127.0.0.1:5500",
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+app = flask.Flask(__name__)
 
+@app.route('/')
+def index():
+    return utils.list_to_str(db.get_items()).replace('\n', '<br>')
 
-@app.get("/")
-async def root():
-    return {"message": "hello from api"}
-
-@app.post("/post-items/")
-async def post_item(item: Item):
-    with open("storage/items.txt", "a") as f:
-        f.write(f"{repr(item)}\n")
-    print(f"{repr(item)} \t wrote")
-    return {"message" : "done"}
-
-@app.get("/get-items")
-async def get_items():
-    try:
-        with open("storage/items.txt", "r") as f:
-            items = {}
-            lines = f.readlines()
-            for i in range(len(lines)):
-                items[i] = lines[i]
-            return items
-    except FileNotFoundError:
-        return {"error" : "file is not exist"}
-
+if __name__ == '__main__':
+    db.Init()
+    db.add_item(Person("albert", PHIS_MATH))
+    app.run("0.0.0.0", port=5000, debug=False)
