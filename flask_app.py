@@ -1,7 +1,8 @@
-from flask import Flask, request 
+from flask import Flask, Response, request 
 from classes import Person
 import dbfunc as db
 import utils
+import json
 
 PHIS_MATH = 1
 INFO_MATH = 2
@@ -19,12 +20,14 @@ def add_user():
     name = data['name']
     prof = data['prof']
     db.add_item(Person(name, prof))
-    return utils.list_to_str(db.get_items()).replace('\n', '<br>')
+    return utils.dict_to_str(db.get_items()).replace('\n', '<br>')
     
 # get JSON with users
 @app.route('/get')
 def get_user():
-    return utils.list_to_str(db.get_items()).replace('\n', '<br>')
+    res = Response(mimetype='application/json')
+    res.set_data(json.dumps(db.get_items()))
+    return res
 
 
 if __name__ == '__main__':

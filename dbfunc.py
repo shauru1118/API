@@ -24,4 +24,5 @@ def get_items():
     cur.execute(f"SELECT * FROM {USERS_TABLE}")
     items = cur.fetchall()
     con.close()
-    return items
+    data = {k:v for (k, v) in items}
+    return data
