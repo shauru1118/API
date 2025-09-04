@@ -1,4 +1,4 @@
-import flask
+from flask import Flask, request 
 from classes import Person
 import dbfunc as db
 import utils
@@ -6,11 +6,26 @@ import utils
 PHIS_MATH = 1
 INFO_MATH = 2
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
 
 @app.route('/')
 def index():
     return utils.list_to_str(db.get_items()).replace('\n', '<br>')
+
+# do add to db from json
+@app.route('/add', methods=['POST'])
+def add_user():
+    data = request.args
+    name = data['name']
+    prof = data['prof']
+    db.add_item(Person(name, prof))
+    return utils.list_to_str(db.get_items()).replace('\n', '<br>')
+    
+# get JSON with users
+@app.route('/get')
+def get_user():
+    return utils.list_to_str(db.get_items()).replace('\n', '<br>')
+
 
 if __name__ == '__main__':
     db.Init()
