@@ -1,4 +1,4 @@
-from flask import Flask, Response, request 
+from flask import Flask, jsonify, request 
 from classes import Person
 import dbfunc as db
 import utils
@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return utils.list_to_str(db.get_items()).replace('\n', '<br>')
+    return utils.dict_to_str(db.get_items()).replace('\n', '<br>')
 
 # do add to db from json
 @app.route('/add', methods=['POST'])
@@ -25,9 +25,7 @@ def add_user():
 # get JSON with users
 @app.route('/get')
 def get_user():
-    res = Response(mimetype='application/json')
-    res.set_data(json.dumps(db.get_items()))
-    return res
+    return jsonify(db.get_items())
 
 
 if __name__ == '__main__':
