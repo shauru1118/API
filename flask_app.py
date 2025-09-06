@@ -22,7 +22,10 @@ def add_user():
 # get JSON with users
 @app.route('/get')
 def get_user():
-    return jsonify(db.get_items())
+    res = db.get_items()
+    if res is None or len(res) == 0:
+        return jsonify({}), 404
+    return jsonify(res)
 
 @app.route('/delete', methods=['POST'])
 def delete_user():
