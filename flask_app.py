@@ -24,7 +24,7 @@ def add_user():
 def get_user():
     res = db.get_items()
     if res is None or len(res) == 0:
-        return jsonify({}), 404
+        return jsonify({"error" : "zero len"}), 404
     return jsonify(res)
 
 @app.route('/delete', methods=['POST'])
