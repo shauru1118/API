@@ -3,9 +3,6 @@ from classes import Person
 import dbfunc as db
 import utils
 
-PHIS_MATH = "phis"
-INFO_MATH = "inf"
-
 app = Flask(__name__)
 
 @app.route('/')
@@ -15,10 +12,11 @@ def index():
 # do add to db from json
 @app.route('/add', methods=['POST'])
 def add_user():
-    data = request.args
+    data = request.get_json()
+    id = data['id']
     name = data['name']
-    prof = data['prof']
-    db.add_item(Person(name, prof))
+    prof = db.PHIS_MATH if data['prof'] == 'phis' else db.INFO_MATH
+    db.add_item(id, name, prof)
     return jsonify(db.get_items())
 
 # get JSON with users
@@ -26,10 +24,22 @@ def add_user():
 def get_user():
     return jsonify(db.get_items())
 
+@app.route('/delete', methods=['POST'])
+def delete_user():
+    data = request.get_json()
+    id = data['id']
+    db.delete_item(id)
+    return jsonify(db.get_items())
+
+@app.route('/phis')
+def get_phis():
+    return jsonify(db.get_phis())
+
+@app.route('/info')
+def get_info():
+    return jsonify(db.get_info())
+
 
 if __name__ == '__main__':
     db.Init()
-    # db.add_item(Person("albert", PHIS_MATH))
-    # db.add_item(Person("ivan", PHIS_MATH))
-    # db.add_item(Person("danya", INFO_MATH))
     app.run("0.0.0.0", port=5000, debug=False)
