@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return utils.dict_to_str(db.get_items()).replace('\n', '<br>')
+    return "users: <br>" + utils.dict_to_str(db.get_items()).replace('\n', '<br>')
 
 # do add to db from json
 @app.route('/add', methods=['POST'])
