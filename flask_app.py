@@ -1,5 +1,4 @@
-from flask import Flask, jsonify, request 
-from classes import Person
+from flask import Flask, jsonify, request, render_template
 import dbfunc as db
 import utils
 
@@ -7,42 +6,42 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "users: <br>" + utils.dict_to_str(db.get_items()).replace('\n', '<br>')
+    return render_template('index.html')
 
 # do add to db from json
-@app.route('/add', methods=['POST'])
+@app.route('/api/add-user', methods=['POST'])
 def add_user():
     data = request.get_json()
     id = data['id']
-    name = data['name']
-    prof = db.PHIS_MATH if data['prof'] == 'phis' else db.INFO_MATH
-    db.add_item(id, name, prof)
-    return jsonify(db.get_items())
+    prof = data['prof']
+    db.add_user(id, prof)
+    return jsonify(db.get_users())
 
 # get JSON with users
-@app.route('/get')
-def get_user():
-    res = db.get_items()
+@app.route('/api/get-users')
+def get_users():
+    res = db.get_users()
     if res is None or len(res) == 0:
-        return jsonify({"error" : "zero len"}), 404
+        return jsonify({"error" : "no users"}), 404
     return jsonify(res)
 
-@app.route('/delete', methods=['POST'])
+@app.route('/api/delete-user', methods=['POST'])
 def delete_user():
     data = request.get_json()
     id = data['id']
     db.delete_item(id)
-    return jsonify(db.get_items())
+    return jsonify(db.get_users())
 
-@app.route('/phis')
+@app.route('/api/get-users-phis')
 def get_phis():
     return jsonify(db.get_phis())
 
-@app.route('/info')
+@app.route('/api/get-users-info')
 def get_info():
     return jsonify(db.get_info())
 
 
 if __name__ == '__main__':
     db.Init()
-    app.run("0.0.0.0", port=5000, debug=False)
+    app.run("0.0.0.0", port=8000, debug=True)
+
