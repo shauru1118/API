@@ -37,7 +37,7 @@ def get_items():
     con.close()
     data = {}
     for user in users:
-        data[int(user[0])] = user[1] + " - " + str(user[2])
+        data[int(user[0])] = (user[1], str(user[2]))
     return data
 
 def get_phis():
@@ -48,7 +48,7 @@ def get_phis():
     con.close()
     data = {}
     for user in users:
-        data[int(user[0])] = user[1] + " - " + str(user[2])
+        data[int(user[0])] = (user[1], str(user[2]))
     return data
 
 def get_info():
@@ -59,5 +59,5 @@ def get_info():
     con.close()
     data = {}
     for user in users:
-        data[int(user[0])] = user[1] + " - " + str(user[2])
+        data[int(user[0])] = (user[1], str(user[2]))
     return data
