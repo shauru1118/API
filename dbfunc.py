@@ -26,7 +26,7 @@ def Init():
 def add_user(id, prof):
     con = sqlite3.connect(DATABASE_FILE)
     cur = con.cursor()
-    cur.execute(f"INSERT INTO {USERS_TABLE} (id, prof) VALUES (?, ?, ?)", (id, prof))
+    cur.execute(f"INSERT INTO {USERS_TABLE} (id, prof) VALUES (?, ?)", (id, prof))
     con.commit()
     con.close()
     return
