@@ -26,7 +26,7 @@ def Init():
 def add_user(id, prof):
     con = sqlite3.connect(DATABASE_FILE)
     cur = con.cursor()
-    cur.execute(f"INSERT INTO {USERS_TABLE} (id, prof) VALUES (?, ?)", (id, prof))
+    cur.execute(f"REPLACE INTO {USERS_TABLE} (id, prof) VALUES (?, ?)", (int(id), int(prof)))    
     con.commit()
     con.close()
     return
@@ -47,7 +47,7 @@ def get_users():
     con.close()
     data = {}
     for user in users:
-        data[int(user[0])] = (user[1], str(user[2]))
+        data[user[0]] = user[1]
     return data
 
 def get_phis():
@@ -58,7 +58,7 @@ def get_phis():
     con.close()
     data = {}
     for user in users:
-        data[int(user[0])] = (user[1], str(user[2]))
+        data[user[0]] = user[1]
     return data
 
 def get_info():
@@ -69,7 +69,7 @@ def get_info():
     con.close()
     data = {}
     for user in users:
-        data[int(user[0])] = (user[1], str(user[2]))
+        data[user[0]] = user[1]
     return data
 
 

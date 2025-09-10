@@ -1,3 +1,4 @@
+import re
 from flask import Flask, jsonify, request, render_template
 import dbfunc as db
 import utils
@@ -15,6 +16,13 @@ def add_user():
     data = request.get_json()
     id = data['id']
     prof = data['prof']
+    db.add_user(id, prof)
+    return jsonify(db.get_users())
+
+@app.route('/api/add-user-args')
+def add_user_args():
+    id = request.args.get('id')
+    prof = request.args.get('prof')
     db.add_user(id, prof)
     return jsonify(db.get_users())
 
