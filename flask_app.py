@@ -1,7 +1,7 @@
-import re
 from flask import Flask, jsonify, request, render_template
 import dbfunc as db
 import utils
+import dz
 
 app = Flask(__name__)
 db.Init()
@@ -55,7 +55,7 @@ def get_info():
 
 @app.route('/api/get-dz')
 def get_dz():
-    return jsonify(utils.get_dz())
+    return jsonify(dz.get_dz())
 
 if __name__ == '__main__':
     app.run("0.0.0.0", port=8000, debug=True)
