@@ -1,19 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Домашики — Дневник</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      color: var(--tg-theme-text-color);
+      background: var(--tg-theme-bg-color);
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background: var(--tg-theme-button-color);
+      color: var(--tg-theme-button-text-color);
+      text-align: center;
+      padding: 1rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .days {
+      display: flex;
+      overflow-x: auto;
+      background: var(--tg-theme-secondary-bg-color, #e5e7eb);
+    }
+
+    .day-btn {
+      flex: 1;
+      padding: 0.8rem;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--tg-theme-text-color);
+      transition: background 0.2s;
+    }
+
+    .day-btn.active {
+      background: var(--tg-theme-button-color);
+      color: var(--tg-theme-button-text-color);
+    }
+
+    .schedule {
+      padding: 1rem;
+    }
+
+    .lesson {
+      background: var(--tg-theme-bg-color);
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border: 1px solid var(--tg-theme-section-border-color, #ccc);
+    }
+
+    .lesson h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: var(--tg-theme-button-color);
+    }
+
+    .lesson p {
+      margin: 0.4rem 0 0;
+      font-size: 0.95rem;
+    }
+  </style>
 </head>
 
 <body>
-    <h1>Home</h1>
-    <h3><a href="/api/get-users">get users</a></h3>
-    <h3><a href="/api/get-users-info">get users info</a></h3>
-    <h3><a href="/api/get-users-phis">get users phis</a></h3>
-    <h3><a href="/api/add-user">add user</a></h3>
-    <h3><a href="/api/delete-user">delete user</a></h3>
+  <header>📘 Домашики — Дневник</header>
+
+  <div class="days">
+    <button class="day-btn active" data-day="monday">Пн</button>
+    <button class="day-btn" data-day="tuesday">Вт</button>
+    <button class="day-btn" data-day="wednesday">Ср</button>
+    <button class="day-btn" data-day="thursday">Чт</button>
+    <button class="day-btn" data-day="friday">Пт</button>
+    <button class="day-btn" data-day="saturday">Сб</button>
+  </div>
+
+  <div class="schedule" id="schedule"></div>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script>
+    const tg = window.Telegram.WebApp;
+
+    tg.expand();
+
+    const data = {
+      monday: [
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "сосал" }
+      ],
+      tuesday: [
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" }
+      ],
+      wednesday: [
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" }
+      ],
+      thursday: [
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" }
+      ],
+      friday: [
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" }
+      ],
+      saturday: [
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" },
+        { "subject": "", "hw": "" }
+      ]
+    };
+
+    const scheduleEl = document.getElementById("schedule");
+    const buttons = document.querySelectorAll(".day-btn");
+
+    function render(day) {
+      scheduleEl.innerHTML = "";
+      data[day].forEach((lesson, index) => {
+        const div = document.createElement("div");
+        div.className = "lesson";
+        div.innerHTML = `<h3>${index + 1}. ${lesson.subject}</h3><p> ${lesson.hw}</p>`;
+        scheduleEl.appendChild(div);
+      });
+    }
+
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        buttons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        render(btn.dataset.day);
+      });
+    });
+
+    render("monday");
+  </script>
 </body>
 
 </html>
