@@ -1,8 +1,0 @@
-import json
-
-
-def get_dz():
-    return json.load(open('example.json', 'r', encoding='utf-8'))
-
-if __name__ == '__main__':
-    print(get_dz())

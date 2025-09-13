@@ -1,7 +1,8 @@
+import time
 from flask import Flask, jsonify, request, render_template
-import dbfunc as db
-import utils
-import dz
+import funcs.dbfunc as db
+import funcs.utils as utils
+import funcs.dz as dz
 
 app = Flask(__name__)
 db.Init()
@@ -55,7 +56,15 @@ def get_info():
 
 @app.route('/api/get-dz')
 def get_dz():
-    return jsonify(dz.get_dz())
+    day = request.json.get('day', dz.get_now_day_digit())
+    now_day = dz.get_now_day_digit()
+    if now_day > day:
+        date = time.strftime("%d.%m.%Y", time.localtime(time.time() + 86400 * (7 + day - now_day)))
+        return jsonify(dz.get_dz(date))
+    elif now_day <= day:
+        date = time.strftime("%d.%m.%Y", time.localtime(time.time() + 86400 * (day - now_day)))
+        return jsonify(dz.get_dz(date))
+
 
 if __name__ == '__main__':
     app.run("0.0.0.0", port=8000, debug=True)
