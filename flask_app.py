@@ -10,7 +10,9 @@ db.Init()
 def index():
     return render_template('index.html')
 
-# do add to db from json
+# ! database api
+
+# * do add to db from json
 @app.route('/api/add-user', methods=['POST'])
 def add_user():
     data = request.get_json()
@@ -49,6 +51,11 @@ def get_phis():
 def get_info():
     return jsonify(db.get_info())
 
+# ! dz api
+
+@app.route('/api/get-dz')
+def get_dz():
+    return jsonify(utils.get_dz())
 
 if __name__ == '__main__':
     app.run("0.0.0.0", port=8000, debug=True)
