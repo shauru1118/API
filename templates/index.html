@@ -102,11 +102,10 @@
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ "day": dayNumber })
+          body: JSON.stringify({ day: dayNumber })
         });
 
         const data = await response.json();
-        console.log(data)
 
         scheduleEl.innerHTML = `
           <h2>${data.Date.full}</h2>
