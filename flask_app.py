@@ -1,10 +1,12 @@
 import time
 from flask import Flask, jsonify, request, render_template
+from flask_cors import CORS
 import funcs.dbfunc as db
 import funcs.utils as utils
 import funcs.dz as dz
 
 app = Flask(__name__)
+CORS(app)
 db.Init()
 
 @app.route('/')
