@@ -23,21 +23,13 @@ translator = GoogleTranslator(source='auto', target='ru')
 
 def make_dz_file(date : str):
     file_name = os.path.join(JSON_DIR, date+'.json')
-    with open(file_name, 'w', encoding='utf-8') as f:
-        f.write(json.dumps({
-            "dz" : False,
-            "Weekday": {
-                "en": time.strftime("%A", time.strptime(date, "%d.%m.%Y")),
-                "ru" : translator.translate(time.strftime("%A", time.strptime(date, "%d.%m.%Y")))
-            },
-            "Date": {
-                "short": date,
-                "full": translator.translate(time.strftime("%A, %d %B %Y", time.strptime(date, "%d.%m.%Y")))
-            },
-            "Subjects": {
+    day = time.strftime("%A", time.strptime(date, "%d.%m.%Y"))
+    data = json.load(open(f'jsons/{day.lower()}.json', 'r', encoding='utf-8'))
+    data["Date"]["short"] = date
+    data["Date"]["full"] = translator.translate(time.strftime("%A, %d %B %Y", time.strptime(date, "%d.%m.%Y")))
 
-            }
-        }, indent=4, ensure_ascii=False))
+    with open(file_name, 'w', encoding='utf-8') as f:
+        f.write(json.dumps(data, indent=4, ensure_ascii=False))
 
 
 def get_now_day_digit() -> int:
@@ -57,7 +49,4 @@ def get_dz(date : str):
     
 
 
-if __name__ == '__main__':
-    print(get_dz('15.09.2025'))
-    print(DAYS[time.localtime().tm_wday+1])
-    print(time.localtime().tm_wday+1)
+# if __name__ == '__main__':
