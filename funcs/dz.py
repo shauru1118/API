@@ -1,9 +1,11 @@
 import json
 import os
+import re
 from sqlite3 import Date
 from textwrap import indent
 import time
 from deep_translator import GoogleTranslator
+from pprint import pprint
 
 JSON_DIR = 'jsons'
 if not os.path.exists(JSON_DIR):
@@ -30,6 +32,8 @@ def make_dz_file(date : str):
 
     with open(file_name, 'w', encoding='utf-8') as f:
         f.write(json.dumps(data, indent=4, ensure_ascii=False))
+    
+    return data
 
 
 def get_now_day_digit() -> int:
@@ -44,9 +48,14 @@ def get_dz(date : str):
     if os.path.exists(file_name):
         return json.load(open(file_name, 'r', encoding='utf-8'))
     else:
-        make_dz_file(date)
-        return json.load(open(file_name, 'r', encoding='utf-8'))
+        return make_dz_file(date)
+
+
+if __name__ == '__main__':
+    date = '16.09.2025'
+    day = time.strftime("%A", time.strptime(date, "%d.%m.%Y"))
+    data = json.load(open(os.path.join(JSON_DIR, f'{day.lower()}.json'), 'r', encoding='utf-8'))
+    print(date)
+    print(day)
+    pprint(data, indent=4, depth=4)
     
-
-
-# if __name__ == '__main__':
