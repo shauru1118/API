@@ -24,7 +24,7 @@ translator = GoogleTranslator(source='auto', target='ru')
 def make_dz_file(date : str):
     file_name = os.path.join(JSON_DIR, date+'.json')
     day = time.strftime("%A", time.strptime(date, "%d.%m.%Y"))
-    data = json.load(open(f'jsons/{day.lower()}.json', 'r', encoding='utf-8'))
+    data = json.load(open(os.path.join(JSON_DIR, f'{day.lower()}.json'), 'r', encoding='utf-8'))
     data["Date"]["short"] = date
     data["Date"]["full"] = translator.translate(time.strftime("%A, %d %B %Y", time.strptime(date, "%d.%m.%Y")))
 
