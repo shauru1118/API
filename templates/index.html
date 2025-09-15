@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Домашики — Дневник</title>
+  <title>Дневник</title>
   <style>
     body {
       color: var(--tg-theme-text-color);
@@ -23,26 +23,39 @@
 
     .days {
       display: flex;
-      overflow-x: auto;
+      justify-content: space-around;
+      padding: 0.6rem;
       background: var(--tg-theme-secondary-bg-color, #e5e7eb);
+      gap: 0.4rem;
+      flex-wrap: wrap;
     }
 
     .day-btn {
       flex: 1;
-      padding: 0.8rem;
+      min-width: 48px;
+      padding: 0.6rem 0.8rem;
       text-align: center;
       cursor: pointer;
       border: none;
-      background: transparent;
+      border-radius: 12px;
+      /* скругление тут!!!!*/
+      background: var(--tg-theme-bg-color);
       font-size: 1rem;
       font-weight: 600;
       color: var(--tg-theme-text-color);
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    }
+
+    .day-btn:hover {
+      background: var(--tg-theme-hint-color, #d1d5db);
+      transform: scale(1.05);
     }
 
     .day-btn.active {
       background: var(--tg-theme-button-color);
       color: var(--tg-theme-button-text-color);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
     }
 
     .schedule {
@@ -72,7 +85,7 @@
 </head>
 
 <body>
-  <header>📘 Домашики — Дневник</header>
+  <header>📘 Дневник</header>
 
   <div class="days">
     <button class="day-btn active" data-day="1">Пн</button>
