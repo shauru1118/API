@@ -27,7 +27,7 @@ def make_dz_file(date : str):
         f.write(json.dumps({
             "dz" : False,
             "Weekday": {
-                "en": translator.translate(time.strftime("%A", time.strptime(date, "%d.%m.%Y"))),
+                "en": time.strftime("%A", time.strptime(date, "%d.%m.%Y")),
                 "ru" : translator.translate(time.strftime("%A", time.strptime(date, "%d.%m.%Y")))
             },
             "Date": {
