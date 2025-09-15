@@ -1,5 +1,6 @@
 import json
 import os
+from sqlite3 import Date
 import time
 
 JSON_DIR = 'jsons'
@@ -14,6 +15,24 @@ DAYS = {
     7: 'sunday'
 }
 
+def make_dz_file(date : str):
+    file_name = os.path.join(JSON_DIR, date+'.json')
+    with open(file_name, 'w', encoding='utf-8') as f:
+        f.write(json.dumps({
+            "dz" : False,
+            "Weekday": {
+                "en": time.strftime("%A", time.strptime(date, "%d.%m.%Y")),
+                "ru" : time.strftime("%A", time.strptime(date, "%d.%m.%Y"))
+            },
+            "Date": {
+                "short": date,
+                "full": time.strftime("%A, %d %B %Y", time.strptime(date, "%d.%m.%Y"))
+            },
+            "Subjects": {
+
+            }
+        }))
+
 def get_now_day_digit() -> int:
     return time.localtime().tm_wday+1
 
@@ -24,6 +43,9 @@ def get_dz(date : str):
     file_name = os.path.join(JSON_DIR, date+'.json')
     
     if os.path.exists(file_name):
+        return json.load(open(file_name, 'r', encoding='utf-8'))
+    else:
+        make_dz_file(date)
         return json.load(open(file_name, 'r', encoding='utf-8'))
     
     return {"error": "no dz"}
