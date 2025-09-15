@@ -2,6 +2,7 @@ import json
 import os
 from sqlite3 import Date
 import time
+from deep_translator import GoogleTranslator
 
 JSON_DIR = 'jsons'
 
@@ -15,18 +16,20 @@ DAYS = {
     7: 'sunday'
 }
 
+translator = GoogleTranslator(source='auto', target='ru')
+
 def make_dz_file(date : str):
     file_name = os.path.join(JSON_DIR, date+'.json')
     with open(file_name, 'w', encoding='utf-8') as f:
         f.write(json.dumps({
             "dz" : False,
             "Weekday": {
-                "en": time.strftime("%A", time.strptime(date, "%d.%m.%Y")),
-                "ru" : time.strftime("%A", time.strptime(date, "%d.%m.%Y"))
+                "en": translator.translate(time.strftime("%A", time.strptime(date, "%d.%m.%Y"))),
+                "ru" : translator.translate(time.strftime("%A", time.strptime(date, "%d.%m.%Y")))
             },
             "Date": {
                 "short": date,
-                "full": time.strftime("%A, %d %B %Y", time.strptime(date, "%d.%m.%Y"))
+                "full": translator.translate(time.strftime("%A, %d %B %Y", time.strptime(date, "%d.%m.%Y")))
             },
             "Subjects": {
 
