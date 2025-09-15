@@ -1,6 +1,7 @@
 import json
 import os
 from sqlite3 import Date
+from textwrap import indent
 import time
 from deep_translator import GoogleTranslator
 
@@ -36,7 +37,8 @@ def make_dz_file(date : str):
             "Subjects": {
 
             }
-        }))
+        }, indent=4, ensure_ascii=False))
+
 
 def get_now_day_digit() -> int:
     return time.localtime().tm_wday+1
