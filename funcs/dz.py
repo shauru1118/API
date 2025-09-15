@@ -5,6 +5,8 @@ import time
 from deep_translator import GoogleTranslator
 
 JSON_DIR = 'jsons'
+if not os.path.exists(JSON_DIR):
+    os.mkdir(JSON_DIR)
 
 DAYS = {
     1: 'monday',
