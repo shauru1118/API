@@ -56,7 +56,7 @@ def get_info():
 
 # ! dz api
 
-@app.route('/api/get-dz')
+@app.route('/api/get-dz', methods=['POST'])
 def get_dz():
     day = request.json.get('day', dz.get_now_day_digit())
     now_day = dz.get_now_day_digit()
