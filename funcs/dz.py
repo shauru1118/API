@@ -53,7 +53,6 @@ def get_dz(date : str):
         make_dz_file(date)
         return json.load(open(file_name, 'r', encoding='utf-8'))
     
-    return {"error": "no dz"}
 
 
 if __name__ == '__main__':
