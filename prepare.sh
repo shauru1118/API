@@ -9,12 +9,6 @@ git fetch --all
 echo ""
 
 echo ""
-echo "    ---- > git reset --hard origin/main < ----"
-echo ""
-git reset --hard origin/main
-echo ""
-
-echo ""
 echo "    ---- > tree < ----"
 echo ""
 tree 
