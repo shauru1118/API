@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo "\n ---- > ls jsons < ---- \n"
-ls jsons 
-echo "------------"
 
 # echo "\n ---- > rm jsons/*09.2025* < ---- \n"
 # rm jsons/*09.2025*
@@ -20,3 +17,6 @@ echo "------------"
 # ls jsons
 # echo "------------"
 
+echo "\n ---- > tree < ---- \n"
+tree 
+echo "------------"
