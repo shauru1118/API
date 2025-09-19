@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Дневник</title>
-  <link rel="icon" type="image/png" href="/static/favicon.png">
-
   <style>
     body {
       color: var(--tg-theme-text-color);
@@ -15,7 +12,6 @@
       margin: 0;
       padding: 0;
     }
-
     header {
       background: var(--tg-theme-button-color);
       color: var(--tg-theme-button-text-color);
@@ -30,12 +26,10 @@
       justify-content: center;
       gap: 0.6rem;
     }
-
     header img {
       height: 1.6rem;
       width: auto;
     }
-
     .days {
       display: flex;
       justify-content: space-around;
@@ -46,7 +40,6 @@
       border-radius: 16px;
       margin: 0.5rem;
     }
-
     .day-btn {
       flex: 1;
       min-width: 48px;
@@ -60,49 +53,53 @@
       font-weight: 600;
       color: var(--tg-theme-text-color);
       transition: background 0.2s, transform 0.1s;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
     }
-
     .day-btn:hover {
       background: var(--tg-theme-hint-color, #d1d5db);
       transform: scale(1.05);
     }
-
     .day-btn.active {
       background: var(--tg-theme-button-color);
       color: var(--tg-theme-button-text-color);
-      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
     }
-
     .schedule {
       padding: 1rem;
     }
-
     .lesson {
       background: var(--tg-theme-bg-color);
       border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       margin-bottom: 1rem;
       padding: 1rem;
       border: 1px solid var(--tg-theme-section-border-color, #ccc);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-
     .lesson h3 {
       margin: 0;
       font-size: 1.1rem;
       color: var(--tg-theme-button-color);
     }
-
     .lesson p {
       margin: 0.4rem 0 0;
       font-size: 0.95rem;
+      flex: 1;
+    }
+    .lesson span.room {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--tg-theme-hint-color, #6b7280);
+      margin-left: 1rem;
+      white-space: nowrap;
     }
   </style>
 </head>
-
 <body>
   <header>
-    <img src="static/favicon.png" alt="" />
+    <img src="icon_dz.png" alt="" />
     Дневник
   </header>
 
@@ -148,11 +145,15 @@
         const lessons = Object.values(data.Subjects).sort((a, b) => a.id - b.id);
 
         lessons.forEach((lesson) => {
+          const room = lesson.room !== undefined ? lesson.room : "N/A";
           const div = document.createElement("div");
           div.className = "lesson";
           div.innerHTML = `
-            <h3>${lesson.id}. ${lesson.sj}</h3>
-            <p>${lesson.hw}</p>
+            <div>
+              <h3>${lesson.id}. ${lesson.sj}</h3>
+              <p>${lesson.hw}</p>
+            </div>
+            <span class="room">${room}</span>
           `;
           scheduleEl.appendChild(div);
         });
@@ -171,9 +172,7 @@
       });
     });
 
-    // Пн при старте
     loadDay(1);
   </script>
 </body>
-
 </html>

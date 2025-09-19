@@ -12,32 +12,38 @@
         "Physics/Informatics": {
             "sj": "Физика / Информатика",
             "hw": "",
-            "id": 1
+            "id": 1,
+            "room": "28 / 31"
         },
         "Physics/Informatics2": {
             "sj": "Физика / Информатика",
             "hw": "",
-            "id": 2
+            "id": 2,
+            "room": "28 / 31"
         },
         "Algebra": {
             "sj": "Алгебра",
             "hw": "",
-            "id": 3
+            "id": 3,
+            "room": "43"
         },
         "Geografia": {
             "sj": "География",
             "hw": "",
-            "id": 4
+            "id": 4,
+            "room": "47"
         },
         "Russian": {
             "sj": "Русский язык",
             "hw": "",
-            "id": 5
+            "id": 5,
+            "room": "45"
         },
         "Home/Physics": {
             "sj": "Домой / Физика",
             "hw": "",
-            "id": 6
+            "id": 6,
+            "room": "дом / 28"
         }
     }
 }

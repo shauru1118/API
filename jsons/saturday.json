@@ -12,32 +12,38 @@
         "English": {
             "sj": "Английский язык",
             "hw": "",
-            "id": 1
+            "id": 1,
+            "room": "38"
         },
         "Geometry": {
             "sj": "Геометрия",
             "hw": "",
-            "id": 2
+            "id": 2,
+            "room": "43"
         },
         "Geometry2": {
             "sj": "Геометрия",
             "hw": "",
-            "id": 3
+            "id": 3,
+            "room": "43"
         },
         "ProbabilityAndStatistics": {
             "sj": "Вероятность и статистика",
             "hw": "",
-            "id": 4
+            "id": 4,
+            "room": "43"
         },
         "Drawing": {
             "sj": "Черчение",
             "hw": "",
-            "id": 5
+            "id": 5,
+            "room": "HZ"
         },
         "IndividualProject": {
             "sj": "Индивидуальный проект",
             "hw": "Нема",
-            "id": 6
+            "id": 6,
+            "room": "28"
         }
     }
 }
