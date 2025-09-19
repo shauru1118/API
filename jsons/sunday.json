@@ -1,0 +1,12 @@
+{
+    "Weekday": {
+        "en": "Sunday",
+        "ru": "Воскресенье"
+    },
+    "Date": {
+        "short": "",
+        "full": ""
+    },
+    "Count": -1,
+    "Subjects": {}
+}
