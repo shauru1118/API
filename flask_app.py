@@ -1,5 +1,5 @@
 import time
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, send_static_file
 from flask_cors import CORS
 import funcs.dbfunc as db
 import funcs.utils as utils
@@ -15,7 +15,7 @@ def index():
 
 @app.route('/<path:path>')
 def send_static(path):
-    return send_static(path)
+    return send_static_file(path)
 
 # ! database api
 
