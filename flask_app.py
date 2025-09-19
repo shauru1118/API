@@ -13,6 +13,10 @@ db.Init()
 def index():
     return render_template('index.html')
 
+@app.route('/<path:path>')
+def send_static(path):
+    return send_static(path)
+
 # ! database api
 
 # * do add to db from json
