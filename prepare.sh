@@ -14,13 +14,7 @@ tree
 echo ""
 
 echo ""
-echo "    ---- > git pull < ----"
+echo "    ---- > git status < ----"
 echo ""
-git pull
-echo ""
-
-echo ""
-echo "    ---- > tree < ----"
-echo ""
-tree 
+git status
 echo ""
