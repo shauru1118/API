@@ -61,7 +61,7 @@ def get_dz():
     day = request.json.get('day', dz.get_now_day_digit())
     now_day = dz.get_now_day_digit()
     if now_day > day:
-        date = time.strftime("%d.%m.%Y", time.localtime(time.time() + 86400 * (7 - day + now_day)))
+        date = time.strftime("%d.%m.%Y", time.localtime(time.time() + 86400 * (7 - (now_day - day))))
         return jsonify(dz.get_dz(date))
     elif now_day <= day:
         date = time.strftime("%d.%m.%Y", time.localtime(time.time() + 86400 * (day - now_day)))
