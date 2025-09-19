@@ -3,9 +3,9 @@
 clear
 
 echo ""
-echo "    ---- > git fetch --all < ----"
+echo "    ---- > git stash < ----"
 echo ""
-git fetch --all
+git stash
 echo ""
 
 echo ""
@@ -19,6 +19,8 @@ echo "    ---- > tree < ----"
 echo ""
 tree 
 echo ""
+
+chmod +x prepare.sh
 
 echo ""
 echo "    ---- > git status < ----"
