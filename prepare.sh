@@ -1,5 +1,6 @@
 #!/bin/bash
 
+clear
 echo ""
 echo "    ---- > git pull < ----"
 echo ""
