@@ -158,7 +158,7 @@
         const lessons = Object.values(data.Subjects).sort((a, b) => a.id - b.id);
 
         lessons.forEach((lesson) => {
-          const room = lesson.room !== undefined ? lesson.room : "N/A";
+          const room = lesson.room; //!== undefined ? lesson.room : "N/A";
           const div = document.createElement("div");
           div.className = "lesson";
           div.innerHTML = `
