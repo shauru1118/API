@@ -1,9 +1,15 @@
 #!/bin/bash
 
-echo "\n ---- > git pull < ---- \n"
+echo ""
+echo "    ---- > git pull < ----"
+echo ""
 git pull
+echo ""
 echo "------------"
 
-echo "\n ---- > tree < ---- \n"
+echo ""
+echo "    ---- > tree < ----"
+echo ""
 tree 
+echo ""
 echo "------------"
