@@ -9,8 +9,8 @@
     },
     "Count": 5,
     "Subjects": {
-        "Russian": {
-            "sj": "Русский язык",
+        "Literature": {
+            "sj": "Литература",
             "hw": "",
             "id": 1
         },
@@ -29,10 +29,15 @@
             "hw": "",
             "id": 4
         },
-        "Informatics": {
+        "Informatics/Physics": {
             "sj": "Информатика / Физика",
             "hw": "",
             "id": 5
+        },
+        "Home/Physics2": {
+            "sj": "Домой / Физика",
+            "hw": "",
+            "id": 6
         }
     }
 }

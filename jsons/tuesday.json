@@ -9,12 +9,12 @@
     },
     "Count": 5,
     "Subjects": {
-        "Phisika": {
+        "Physics/Informatics": {
             "sj": "Физика / Информатика",
             "hw": "",
             "id": 1
         },
-        "Phisika2": {
+        "Physics/Informatics2": {
             "sj": "Физика / Информатика",
             "hw": "",
             "id": 2
@@ -29,10 +29,15 @@
             "hw": "",
             "id": 4
         },
-        "Literatura": {
-            "sj": "Литература",
+        "Russian": {
+            "sj": "Русский язык",
             "hw": "",
             "id": 5
+        },
+        "Home/Physics": {
+            "sj": "Домой / Физика",
+            "hw": "",
+            "id": 6
         }
     }
 }
