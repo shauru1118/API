@@ -140,7 +140,7 @@
       scheduleEl.innerHTML = "Загрузка...";
 
       try {
-        const response = await fetch("https://shauru.pythonanywhere.com/api/get-dz", {
+        const response = await fetch("/api/get-dz", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"

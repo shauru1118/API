@@ -66,13 +66,13 @@ def get_dz():
     now_day = dz.get_now_day_digit()
     if now_day > day:
         date = time.strftime("%d.%m.%Y", time.localtime(time.time() + 86400 * (7 - (now_day - day))))
-        return jsonify(dz.get_dz(date))
+        return jsonify(dz.get_dz(day, date))
     elif now_day <= day:
         date = time.strftime("%d.%m.%Y", time.localtime(time.time() + 86400 * (day - now_day)))
-        return jsonify(dz.get_dz(date))
+        return jsonify(dz.get_dz(day, date))
 
 
 if __name__ == '__main__':
     print("start local server")
-    app.run("0.0.0.0", port=8000, debug=True)
+    app.run("0.0.0.0", port=5000, debug=True)
 

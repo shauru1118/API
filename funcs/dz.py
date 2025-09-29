@@ -1,8 +1,6 @@
 import json
 import os
-import re
-from sqlite3 import Date
-from textwrap import indent
+import funcs.dbfunc as db
 import time
 from deep_translator import GoogleTranslator
 from pprint import pprint
@@ -42,14 +40,26 @@ def get_now_day_digit() -> int:
 def get_now_day()-> str:
     return DAYS[get_now_day_digit()]
 
-def get_dz(date : str):
-    file_name = os.path.join(JSON_DIR, date+'.json')
+def get_dz(day: int, date : str):
+    # file_name = os.path.join(JSON_DIR, date+'.json')
     
-    if os.path.exists(file_name):
-        return json.load(open(file_name, 'r', encoding='utf-8'))
-    else:
-        return make_dz_file(date)
+    # if os.path.exists(file_name):
+    #     return json.load(open(file_name, 'r', encoding='utf-8'))
+    # else:
+    #     return make_dz_file(date)
+    
+    file_name = os.path.join(JSON_DIR, DAYS[day]+'.json')
+    data = json.load(open(file_name, 'r', encoding='utf-8'))
+    
+    data["Date"]["short"] = date
+    data["Date"]["full"] = translator.translate(time.strftime("%A, %d %B %Y", time.strptime(date, "%d.%m.%Y")))
+    homeworks = db.get_homework(date)
+    for subject, subject_data in data["Subjects"].items():
+        sj = subject_data.get('sj')
+        subject_data['hw'] = homeworks.get(sj, '')
 
+    return data
+    
 
 if __name__ == '__main__':
     date = '16.09.2025'
