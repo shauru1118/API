@@ -109,7 +109,29 @@ def add_homework(date: str, subject: str, hw: str):
     con.close()
     return
 
+def delete_subject_homework(date: str, subject: str):
+    con = sqlite3.connect(DATABASE_FILE)
+    cur = con.cursor()
+    cur.execute(f"DELETE FROM {HOME_WORKS_TABLE} WHERE date = ? AND subject = ?", (date, subject))
+    con.commit()
+    con.close()
+    return
+
+def delete_homework(date: str):
+    con = sqlite3.connect(DATABASE_FILE)
+    cur = con.cursor()
+    cur.execute(f"DELETE FROM {HOME_WORKS_TABLE} WHERE date = ?", (date,))
+    con.commit()
+    con.close()
+    return
+
+
 if __name__ == '__main__':
     Init()
-    add_homework('30.09.2025', 'Алгебра', 'производная')
+    delete_homework('30.09.2025')
+    add_homework('30.09.2025', 'Алгебра', '5.8, 5.12, 5.14, 5.17')
+    add_homework('30.09.2025', 'География', 'Выполнить практическую работу в файле из сферума')
+    add_homework('30.09.2025', 'Русский язык', 'Поставить ударения в любых двух вариантах (сферум)'+
+                "\nБудет работа по ударениям")
+    add_homework('30.09.2025', 'Физика / Информатика', '5.25, 5.28, 5.32\nНужны иформаторы для инфмат группы')
     print(get_all_homeworks())
