@@ -63,13 +63,14 @@ def get_info():
 @app.route('/api/get-dz', methods=['POST'])
 def get_dz():
     day = request.json.get('day', dz.get_now_day_digit())
+    id = request.json.get('id', None)
     now_day = dz.get_now_day_digit()
     if now_day > day:
         date = time.strftime("%d.%m.%Y", time.localtime(time.time() + 86400 * (7 - (now_day - day))))
-        return jsonify(dz.get_dz(day, date))
+        return jsonify(dz.get_dz(day, date, id))
     elif now_day <= day:
         date = time.strftime("%d.%m.%Y", time.localtime(time.time() + 86400 * (day - now_day)))
-        return jsonify(dz.get_dz(day, date))
+        return jsonify(dz.get_dz(day, date, id))
 
 
 if __name__ == '__main__':

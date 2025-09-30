@@ -136,9 +136,13 @@
     const scheduleEl = document.getElementById("schedule");
     const buttons = document.querySelectorAll(".day-btn");
 
+    const user_id = tg.initDataUnsafe?.user?.id;
+    console.warn("USER ID")
+    console.warn(user_id);
+
+
     async function loadDay(dayNumber) {
       scheduleEl.innerHTML = "Загрузка...";
-
       try {
         const response = await fetch("/api/get-dz", {
           method: "POST",

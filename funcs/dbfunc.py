@@ -96,10 +96,10 @@ def get_homework(date: str) -> list:
 def get_all_homeworks() -> list:
     con = sqlite3.connect(DATABASE_FILE)
     cur = con.cursor()
-    cur.execute(f"SELECT * FROM {HOME_WORKS_TABLE}")
+    cur.execute(f"SELECT subject, hw FROM {HOME_WORKS_TABLE}")
     hws = cur.fetchall()
     con.close()
-    return hws
+    return {sj[0]: sj[1] for sj in hws}
 
 def add_homework(date: str, subject: str, hw: str):
     con = sqlite3.connect(DATABASE_FILE)
@@ -135,8 +135,8 @@ if __name__ == '__main__':
 Поставить ударения в любых двух вариантах (сферум).
 Будет работа по ударениям
 """)
-    add_homework('30.09.2025', 'Физика / Информатика', '5.25, 5.28, 5.32 | Нужны информаторы для инфмат группы')
-    add_homework('30.09.2025', 'Домой / Физика', 'Домой | Нужны информаторы для инфмат группы')
+    add_homework('30.09.2025', 'Физика / Информатика', '5.25, 5.28, 5.32 / Нужны информаторы для инфмат группы')
+    add_homework('30.09.2025', 'Домой / Физика', 'Домой / Нужны информаторы для инфмат группы')
 
     print(get_all_homeworks())
 

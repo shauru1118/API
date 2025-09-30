@@ -40,7 +40,7 @@ def get_now_day_digit() -> int:
 def get_now_day()-> str:
     return DAYS[get_now_day_digit()]
 
-def get_dz(day: int, date : str):
+def get_dz(day: int, date : str, id):
     # file_name = os.path.join(JSON_DIR, date+'.json')
     
     # if os.path.exists(file_name):
@@ -48,15 +48,39 @@ def get_dz(day: int, date : str):
     # else:
     #     return make_dz_file(date)
     
+    user_prof = None
+    user_index = None
+    if id:
+        user_prof = db.get_prof(id)
+        if user_prof == 1:
+            user_index = 0
+        elif user_prof == 0:
+            user_index = 1
+        
+    
     file_name = os.path.join(JSON_DIR, DAYS[day]+'.json')
     data = json.load(open(file_name, 'r', encoding='utf-8'))
     
     data["Date"]["short"] = date
     data["Date"]["full"] = translator.translate(time.strftime("%A, %d %B %Y", time.strptime(date, "%d.%m.%Y")))
     homeworks = db.get_homework(date)
+    # if len(homeworks) == 0:
+    #     return data
+    print("!!!!!!!!! _______________", date, user_prof, homeworks, sep="\n")
     for subject, subject_data in data["Subjects"].items():
         sj = subject_data.get('sj')
-        subject_data['hw'] = homeworks.get(sj, '')
+        homework = homeworks.get(sj, '')
+        print("!!!!!!!!! _______________", sj, sep="\n")
+        if "/" in homework:
+            if user_index:
+                sj = sj.split('/')
+                subject_data['sj'] = sj[0 if user_prof==1 else 1].strip()
+                subject_data['hw'] = homework.split("/")[0 if user_prof==1 else 1]
+            else:
+                subject_data['hw'] = homework
+                
+        else:
+            subject_data['hw'] = homework
 
     return data
     
