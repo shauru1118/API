@@ -72,10 +72,10 @@ def get_dz(day: int, date : str, id):
         homework = homeworks.get(sj, '')
         print("!!!!!!!!! _______________", sj, sep="\n")
         if "/" in homework:
-            if user_index:
+            if user_index in [0, 1]:
                 sj = sj.split('/')
-                subject_data['sj'] = sj[0 if user_prof==1 else 1].strip()
-                subject_data['hw'] = homework.split("/")[0 if user_prof==1 else 1]
+                subject_data['sj'] = sj[user_index].strip()
+                subject_data['hw'] = homework.split("/")[user_index]
             else:
                 subject_data['hw'] = homework
                 
