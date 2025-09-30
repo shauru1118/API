@@ -76,6 +76,7 @@ def get_dz(day: int, date : str, id):
                 sj = sj.split('/')
                 subject_data['sj'] = sj[user_index].strip()
                 subject_data['hw'] = homework.split("/")[user_index]
+                subject_data['room'] = subject_data['room'].split("/")[user_index].strip()
             else:
                 subject_data['hw'] = homework
                 
