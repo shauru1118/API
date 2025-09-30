@@ -66,7 +66,7 @@ def get_dz(day: int, date : str, id):
     homeworks = db.get_homework(date)
     # if len(homeworks) == 0:
     #     return data
-    print("!!!!!!!!! _______________", date, user_prof, homeworks, sep="\n")
+    print("!!!!!!!!! _______________", date, day, id, user_prof, homeworks, sep="\n")
     for subject, subject_data in data["Subjects"].items():
         sj = subject_data.get('sj')
         homework = homeworks.get(sj, '')
