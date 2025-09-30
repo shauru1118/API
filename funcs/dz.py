@@ -51,7 +51,7 @@ def get_dz(day: int, date : str, id):
     user_prof = None
     user_index = None
     if id:
-        user_prof = db.get_prof(id)
+        user_prof = db.get_prof(int(id))
         if user_prof == 1:
             user_index = 0
         elif user_prof == 0:
