@@ -149,7 +149,7 @@
           headers: {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({ day: dayNumber })
+          body: JSON.stringify({ day: dayNumber, id: user_id })
         });
 
         if (!response.ok) {
