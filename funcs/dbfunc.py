@@ -1,5 +1,6 @@
-from ast import List
 import sqlite3
+from pprint import pprint
+
 
 DATABASE_FILE = 'main.db'
 USERS_TABLE = 'users'
@@ -96,10 +97,10 @@ def get_homework(date: str) -> list:
 def get_all_homeworks() -> list:
     con = sqlite3.connect(DATABASE_FILE)
     cur = con.cursor()
-    cur.execute(f"SELECT subject, hw FROM {HOME_WORKS_TABLE}")
+    cur.execute(f"SELECT date, subject, hw FROM {HOME_WORKS_TABLE}")
     hws = cur.fetchall()
     con.close()
-    return {sj[0]: sj[1] for sj in hws}
+    return hws
 
 def add_homework(date: str, subject: str, hw: str):
     con = sqlite3.connect(DATABASE_FILE)
@@ -131,7 +132,8 @@ def delete_homework(date: str):
 
 if __name__ == '__main__':
     Init()
-    print(get_all_homeworks())
+    pprint(get_all_homeworks(), indent=4)
+    print("\n\n")
     date_ = '03.10.2025'
     delete_homework(date_)
     add_homework(date_, 'Литература', 'Будет русский (дз с паронимами)')
@@ -143,5 +145,5 @@ if __name__ == '__main__':
     
     # add_homework(date_, 'Домой / Физика', 'Домой / Нужны информаторы для инфмат группы')
 
-    print(get_all_homeworks())
+    pprint(get_all_homeworks(), indent=4)
 
