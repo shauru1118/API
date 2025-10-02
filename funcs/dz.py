@@ -59,7 +59,7 @@ def get_dz(day: int, date : str, id):
         
     
     file_name = os.path.join(JSON_DIR, DAYS[day]+'.json')
-    data = json.load(open(file_name, 'r', encoding='utf-8'))
+    data: dict = json.load(open(file_name, 'r', encoding='utf-8'))
     
     data["Date"]["short"] = date
     data["Date"]["full"] = translator.translate(time.strftime("%A, %d %B %Y", time.strptime(date, "%d.%m.%Y")))
@@ -71,6 +71,8 @@ def get_dz(day: int, date : str, id):
         sj: str = subject_data.get('sj')
         if "/" in sj:
             sj = sj.split("/")[user_index].strip()
+        if sj == "Домой":
+            data["Subjects"].pop(subject)
         homework = homeworks.get(sj, '')
         print("!!!!!!!!! _______________", sj, sep="\n")
         # if "/" in homework:
@@ -84,6 +86,7 @@ def get_dz(day: int, date : str, id):
                 
         # else:
         subject_data['hw'] = homework
+        subject_data['sj'] = sj
 
     return data
 

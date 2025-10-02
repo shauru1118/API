@@ -137,7 +137,7 @@ if __name__ == '__main__':
     date_ = '03.10.2025'
     delete_homework(date_)
     add_homework(date_, 'Литература', 'Будет русский (дз с паронимами)')
-    add_homework(date_, 'Английский', 'WB: p. 14 ex. 1-3')
+    add_homework(date_, 'Английский язык', 'WB: p. 14 ex. 1-3')
     add_homework(date_, 'Алгебра', '6.7, 6.9, 6.13')
     add_homework(date_, 'История', '6 параграф, <<почему 1920-ые — "ревущие двадцатые">>')
     add_homework(date_, 'Информатика', 'Презентации')
