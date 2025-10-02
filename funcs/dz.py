@@ -64,6 +64,7 @@ def get_dz(day: int, date : str, id):
     data["Date"]["short"] = date
     data["Date"]["full"] = translator.translate(time.strftime("%A, %d %B %Y", time.strptime(date, "%d.%m.%Y")))
     homeworks = db.get_homework(date)
+    to_del = []
     # if len(homeworks) == 0:
     #     return data
     print("!!!!!!!!! _______________", date, day, id, user_prof, homeworks, sep="\n")
@@ -72,8 +73,7 @@ def get_dz(day: int, date : str, id):
         if "/" in sj:
             sj = sj.split("/")[user_index].strip()
         if sj == "Домой":
-            data["Subjects"].pop(subject)
-            data["Count"] -= 1
+            to_del.append(subject)
         homework = homeworks.get(sj, '')
         print("!!!!!!!!! _______________", sj, sep="\n")
         # if "/" in homework:
@@ -88,6 +88,10 @@ def get_dz(day: int, date : str, id):
         # else:
         subject_data['hw'] = homework
         subject_data['sj'] = sj
+
+    for i in to_del:
+        data["Subjects"].pop(i)
+    data["Count"] -= len(to_del)
 
     return data
 
