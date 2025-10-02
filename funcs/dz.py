@@ -73,6 +73,7 @@ def get_dz(day: int, date : str, id):
             sj = sj.split("/")[user_index].strip()
         if sj == "Домой":
             data["Subjects"].pop(subject)
+            data["Count"] -= 1
         homework = homeworks.get(sj, '')
         print("!!!!!!!!! _______________", sj, sep="\n")
         # if "/" in homework:
