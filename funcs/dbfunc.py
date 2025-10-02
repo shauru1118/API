@@ -131,6 +131,7 @@ def delete_homework(date: str):
 
 if __name__ == '__main__':
     Init()
+    print(get_all_homeworks())
     date_ = '03.10.2025'
     delete_homework(date_)
     add_homework(date_, 'Литература', 'Будет русский (дз с паронимами)')
