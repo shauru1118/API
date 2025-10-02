@@ -14,7 +14,7 @@ def Init():
     cur = con.cursor()
     cur.execute(f"CREATE TABLE IF NOT EXISTS {USERS_TABLE} (id INTEGER PRIMARY KEY, prof INTEGER)")
     cur.execute(f"CREATE TABLE IF NOT EXISTS {PROFILS_TABLE} (profile INTEGER, description TEXT)")
-    cur.execute(f"CREATE TABLE IF NOT EXISTS {HOME_WORKS_TABLE} (date TEXT, subject TEXT, hw TEXT)")
+    cur.execute(f"CREATE TABLE IF NOT EXISTS {HOME_WORKS_TABLE} (date TEXT, subject TEXT, hw TEXT, UNIQUE(date, subject))")
     con.commit()
     
     
@@ -104,7 +104,10 @@ def get_all_homeworks() -> list:
 def add_homework(date: str, subject: str, hw: str):
     con = sqlite3.connect(DATABASE_FILE)
     cur = con.cursor()
-    cur.execute(f"REPLACE INTO {HOME_WORKS_TABLE} (date, subject, hw) VALUES (?, ?, ?)", (date, subject, hw))
+    cur.execute(f"INSERT INTO {HOME_WORKS_TABLE} (date, subject, hw) " + 
+                "VALUES (?, ?, ?) " +
+                "ON CONFLICT(date, subject) DO UPDATE SET hw = excluded.hw;", 
+                (date, subject, hw))
     con.commit()
     con.close()
     return

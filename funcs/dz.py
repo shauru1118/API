@@ -68,22 +68,27 @@ def get_dz(day: int, date : str, id):
     #     return data
     print("!!!!!!!!! _______________", date, day, id, user_prof, homeworks, sep="\n")
     for subject, subject_data in data["Subjects"].items():
-        sj = subject_data.get('sj')
+        sj: str = subject_data.get('sj')
+        if "/" in sj:
+            sj = sj.split("/")[user_index].strip()
         homework = homeworks.get(sj, '')
         print("!!!!!!!!! _______________", sj, sep="\n")
-        if "/" in homework:
-            if user_index in [0, 1]:
-                sj = sj.split('/')
-                subject_data['sj'] = sj[user_index].strip()
-                subject_data['hw'] = homework.split("/")[user_index]
-                subject_data['room'] = subject_data['room'].split("/")[user_index].strip()
-            else:
-                subject_data['hw'] = homework
+        # if "/" in homework:
+        #     if user_index in [0, 1]:
+        #         sj = sj.split('/')
+        #         subject_data['sj'] = sj[user_index].strip()
+        #         subject_data['hw'] = homework.split("/")[user_index]
+        #         subject_data['room'] = subject_data['room'].split("/")[user_index].strip()
+        #     else:
+        #         subject_data['hw'] = homework
                 
-        else:
-            subject_data['hw'] = homework
+        # else:
+        subject_data['hw'] = homework
 
     return data
+
+def add_homework(date:str, sj:str, hw:str):
+    db.add_homework(date, sj, hw)
     
 
 if __name__ == '__main__':

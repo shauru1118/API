@@ -5,6 +5,8 @@ import funcs.dbfunc as db
 import funcs.utils as utils
 import funcs.dz as dz
 
+STATUS_OK = {"status":"ok"}
+
 app = Flask(__name__)
 CORS(app)
 db.Init()
@@ -19,7 +21,6 @@ def path(path):
 
 # ! database api
 
-# * do add to db from json
 @app.route('/api/add-user', methods=['POST'])
 def add_user():
     data = request.get_json()
@@ -35,7 +36,6 @@ def add_user_args():
     db.add_user(id, prof)
     return jsonify(db.get_users())
 
-# get JSON with users
 @app.route('/api/get-users')
 def get_users():
     res = db.get_users()
@@ -72,6 +72,17 @@ def get_dz():
         date = time.strftime("%d.%m.%Y", time.localtime(time.time() + 86400 * (day - now_day)))
         return jsonify(dz.get_dz(day, date, id))
 
+@app.route("/api/add-dz", methods=["POST"])
+def add_homework():
+    data = request.get_json()
+
+    date = data["date"]
+    sj = data["sj"]
+    homework = data["hw"]
+    
+    dz.add_homework(date, sj, homework)
+    
+    return jsonify(STATUS_OK)
 
 if __name__ == '__main__':
     print("start local server")
