@@ -15,7 +15,7 @@ def Init():
     cur = con.cursor()
     cur.execute(f"CREATE TABLE IF NOT EXISTS {USERS_TABLE} (id INTEGER PRIMARY KEY, prof INTEGER)")
     cur.execute(f"CREATE TABLE IF NOT EXISTS {PROFILS_TABLE} (profile INTEGER, description TEXT)")
-    cur.execute(f"CREATE TABLE IF NOT EXISTS {HOME_WORKS_TABLE} (date TEXT, subject TEXT, hw TEXT, UNIQUE(date, subject))")
+    cur.execute(f"CREATE TABLE IF NOT EXISTS {HOME_WORKS_TABLE} (date TEXT, subject TEXT, hw TEXT)")
     con.commit()
     
     
@@ -105,9 +105,8 @@ def get_all_homeworks() -> list:
 def add_homework(date: str, subject: str, hw: str):
     con = sqlite3.connect(DATABASE_FILE)
     cur = con.cursor()
-    cur.execute(f"INSERT INTO {HOME_WORKS_TABLE} (date, subject, hw) " + 
-                "VALUES (?, ?, ?) " +
-                "ON CONFLICT(date, subject) DO UPDATE SET hw = excluded.hw;", 
+    cur.execute(f"REPLACE INTO {HOME_WORKS_TABLE} (date, subject, hw) " + 
+                "VALUES (?, ?, ?) ",
                 (date, subject, hw))
     con.commit()
     con.close()
@@ -127,12 +126,13 @@ def delete_homework(date: str):
     cur.execute(f"DELETE FROM {HOME_WORKS_TABLE} WHERE date = ?", (date,))
     con.commit()
     con.close()
-    return
+    return    pprint(get_all_homeworks(), indent=4)
+
 
 
 if __name__ == '__main__':
     Init()
-    pprint(get_all_homeworks(), indent=4)
+    pprint(get_all_homeworks(), indent=4, depth=2, width=100)
     print("\n\n")
     date_ = '03.10.2025'
     delete_homework(date_)
@@ -145,5 +145,5 @@ if __name__ == '__main__':
     
     # add_homework(date_, 'Домой / Физика', 'Домой / Нужны информаторы для инфмат группы')
 
-    pprint(get_all_homeworks(), indent=4)
+    pprint(get_all_homeworks(), indent=4, depth=2, width=100)
 
