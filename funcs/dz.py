@@ -77,7 +77,7 @@ def get_dz(day: int, date : str, id):
             to_del.append(subject)
             continue
         homework = homeworks.get(sj, '')
-        print("!!!!!!!!! _______________", sj, sep="\n")
+        # print("!!!!!!!!! _______________", sj, sep="\n")
         # if "/" in homework:
         #     if user_index in [0, 1]:
         #         sj = sj.split('/')
