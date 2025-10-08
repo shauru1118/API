@@ -72,8 +72,8 @@ def get_dz(day: int, date : str, id):
         sj: str = subject_data.get('sj')
         if "/" in sj:
             print(f"/ in {sj = }")
-            sj = sj.split("/")[user_index]
-            subject_data["room"] = subject_data["room"].split("/")[user_index]
+            sj = sj.split("/")[user_index].strip()
+            subject_data["room"] = subject_data["room"].split("/")[user_index].strip()
         if sj == "Домой":
             print(f"Домой = {sj=}")
             to_del.append(subject)
