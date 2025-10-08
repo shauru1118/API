@@ -80,7 +80,7 @@ def get_dz(day: int, date : str, id):
             print(f"Домой = {sj=}")
             to_del.append(subject)
             continue
-        homework = homeworks.get(sj.strip().lower().replace('\xa0', ' '), 'нет дз')
+        homework = homeworks.get(sj.strip().lower().replace('\xa0', ' '), 'нет')
         # print("!!!!!!!!! _______________", sj, sep="\n")
         # if "/" in homework:
         #     if user_index in [0, 1]:
@@ -94,7 +94,7 @@ def get_dz(day: int, date : str, id):
         # else:
         subject_data['hw'] = homework
         subject_data['sj'] = sj
-        print(f"{sj in homeworks.keys() = }", f"'{repr(sj)}'", f"'{repr(homework)}'", "-"*40, sep="\n")
+        print(f"{sj.strip().lower().replace('\xa0', ' ') in homeworks.keys() = }", f"'{repr(sj)}'", f"'{repr(homework)}'", "-"*40, sep="\n")
 
     for i in to_del:
         data["Subjects"].pop(i)
