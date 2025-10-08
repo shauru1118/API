@@ -67,13 +67,15 @@ def get_dz(day: int, date : str, id):
     to_del = []
     # if len(homeworks) == 0:
     #     return data
-    print("!!!!!!!!! _______________", date, day, id, user_prof, homeworks, sep="\n")
+    print("!!!!!!!!! _______________", f"{date = }", f"{day = }", f"{id = }", f"{user_prof = }", f"{homeworks = }", sep="\n")
     for subject, subject_data in data["Subjects"].items():
         sj: str = subject_data.get('sj')
         if "/" in sj:
-            sj = sj.split("/")[user_index].strip()
-            subject_data["room"] = subject_data["room"].split("/")[user_index].strip()
+            print(f"/ in {sj = }")
+            sj = sj.split("/")[user_index]
+            subject_data["room"] = subject_data["room"].split("/")[user_index]
         if sj == "Домой":
+            print(f"Домой = {sj=}")
             to_del.append(subject)
             continue
         homework = homeworks.get(sj, '')
