@@ -67,7 +67,7 @@ def get_dz(day: int, date : str, id):
     to_del = []
     # if len(homeworks) == 0:
     #     return data
-    print("!!!!!!!!! _______________", date, day, id, user_prof, *homeworks, sep="\n")
+    print("!!!!!!!!! _______________", date, day, id, user_prof, homeworks, sep="\n")
     for subject, subject_data in data["Subjects"].items():
         sj: str = subject_data.get('sj')
         if "/" in sj:
