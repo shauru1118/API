@@ -69,7 +69,7 @@ def get_dz(day: int, date : str, id):
     #     return data
     print("!!!!!!!!! _______________", f"{date = }", f"{day = }", f"{id = }", f"{user_prof = }", f"{homeworks = }", sep="\n")
     for subject, subject_data in data["Subjects"].items():
-        sj: str = subject_data.get('sj')
+        sj: str = subject_data.get('sj').strip()
         if "/" in sj:
             print(f"/ in {sj = }")
             sj = sj.split("/")[user_index].strip()
