@@ -86,7 +86,7 @@ def get_prof(id: int) -> int:
     con.close()
     return user[1]
 
-def get_homework(date: str) -> list:
+def get_homework(date: str) -> dict:
     con = sqlite3.connect(DATABASE_FILE)
     cur = con.cursor()
     cur.execute(f"SELECT subject, hw FROM {HOME_WORKS_TABLE} WHERE date = ?", (date,))
