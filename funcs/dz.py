@@ -90,6 +90,7 @@ def get_dz(day: int, date : str, id):
         # else:
         subject_data['hw'] = homework
         subject_data['sj'] = sj
+        print(sj, homework, "-"*40, sep="\n")
 
     for i in to_del:
         data["Subjects"].pop(i)
