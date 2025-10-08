@@ -133,17 +133,17 @@ def delete_homework(date: str):
 if __name__ == '__main__':
     Init()
     pprint(get_all_homeworks(), indent=4, depth=2, width=100)
-    print("\n\n")
-    date_ = '03.10.2025'
-    delete_homework(date_)
-    add_homework(date_, 'Литература', 'Будет русский (дз с паронимами)')
-    add_homework(date_, 'Английский язык', 'WB: p. 14 ex. 1-3')
-    add_homework(date_, 'Алгебра', '6.7, 6.9, 6.13')
-    add_homework(date_, 'История', '6 параграф, <<почему 1920-ые — "ревущие двадцатые">>')
-    add_homework(date_, 'Информатика', 'Презентации')
-    add_homework(date_, 'Физика', 'Нужны информаторы для инфмат')
+    # print("\n\n")
+    # date_ = '03.10.2025'
+    # delete_homework(date_)
+    # add_homework(date_, 'Литература', 'Будет русский (дз с паронимами)')
+    # add_homework(date_, 'Английский язык', 'WB: p. 14 ex. 1-3')
+    # add_homework(date_, 'Алгебра', '6.7, 6.9, 6.13')
+    # add_homework(date_, 'История', '6 параграф, <<почему 1920-ые — "ревущие двадцатые">>')
+    # add_homework(date_, 'Информатика', 'Презентации')
+    # add_homework(date_, 'Физика', 'Нужны информаторы для инфмат')
     
-    # add_homework(date_, 'Домой / Физика', 'Домой / Нужны информаторы для инфмат группы')
+    # # add_homework(date_, 'Домой / Физика', 'Домой / Нужны информаторы для инфмат группы')
 
-    pprint(get_all_homeworks(), indent=4, depth=2, width=100)
+    # pprint(get_all_homeworks(), indent=4, depth=2, width=100)
 
