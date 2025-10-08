@@ -78,7 +78,7 @@ def get_dz(day: int, date : str, id):
             print(f"Домой = {sj=}")
             to_del.append(subject)
             continue
-        homework = homeworks.get(sj, '')
+        homework = homeworks.get(sj, 'нет дз')
         # print("!!!!!!!!! _______________", sj, sep="\n")
         # if "/" in homework:
         #     if user_index in [0, 1]:
