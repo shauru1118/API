@@ -92,7 +92,7 @@ def get_homework(date: str) -> dict:
     cur.execute(f"SELECT subject, hw FROM {HOME_WORKS_TABLE} WHERE date = ?", (date,))
     hws = cur.fetchall()
     con.close()
-    return {sj[0]: sj[1] for sj in hws}
+    return {sj[0].strip(): sj[1].strip() for sj in hws}
 
 def get_all_homeworks() -> list:
     con = sqlite3.connect(DATABASE_FILE)
