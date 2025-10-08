@@ -84,6 +84,12 @@ def add_homework():
     
     return jsonify(STATUS_OK)
 
+@app.route("/api/clean", methods=["POST"])
+def clean():
+    date = request.get_json()["date"]
+    db.delete_homework(date)
+    return jsonify(STATUS_OK)
+
 if __name__ == '__main__':
     print("start local server")
     app.run("0.0.0.0", port=5000, debug=True)
